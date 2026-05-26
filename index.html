@@ -73,59 +73,36 @@
   #landing { position: relative; z-index: 2; max-width: 1320px; margin: 0 auto; padding: 0 40px; }
 
   .hero-land {
-    min-height: 100vh; padding-top: 120px; padding-bottom: 80px;
-    display: flex; flex-direction: column; align-items: center;
-    text-align: center; gap: 0; position: relative;
+    min-height: 100vh; padding-top: 100px; padding-bottom: 60px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    grid-template-rows: auto;
+    column-gap: 64px;
+    align-items: center;
+    position: relative;
   }
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 7px 14px; border-radius: 999px;
-    background: var(--paper); border: 1px solid var(--line);
-    font-size: 12px; color: var(--ink-soft); margin-bottom: 32px; font-weight: 500;
-  }
-  .hero-tag .live { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 3px rgba(217,88,58,.18); }
-
-  .hero-headline {
-    font-weight: 900; letter-spacing: -.045em;
-    font-size: clamp(48px, 7vw, 104px);
-    line-height: 1.12; color: var(--ink);
-  }
-  .hero-headline .accent { color: var(--accent); }
-  .hero-headline .stroke {
-    -webkit-text-stroke: 1.5px var(--ink); color: transparent; font-style: italic;
-  }
-  .hero-sub { margin: 32px auto 0; max-width: 540px; font-size: 16px; color: var(--ink-soft); line-height: 1.65; }
-  .hero-cta { margin-top: 40px; display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; }
-  .hero-meta-strip {
-    margin: 56px auto 0; padding-top: 28px;
-    border-top: 1px solid var(--line);
-    display: flex; justify-content: center; gap: 64px;
-    max-width: 520px; width: 100%;
-  }
-  .hero-meta-strip > div { text-align: center; }
-  .hero-meta-strip .num { font-weight: 900; font-size: 32px; letter-spacing: -.03em; line-height: 1; }
-  .hero-meta-strip .lab { margin-top: 6px; font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
-
+  /* 캐릭터 이미지 — 왼쪽 열 전체 span */
   .hero-visual {
-    position: relative; width: 100%; max-width: 320px;
-    margin: 48px auto 0; aspect-ratio: 3/4;
-    display: flex; align-items: center; justify-content: center;
+    grid-column: 1;
+    grid-row: 1 / 5;
+    position: relative;
+    width: 100%; aspect-ratio: 3/4;
     border-radius: 28px; overflow: hidden;
     box-shadow: 0 24px 60px -16px rgba(26,22,20,.25);
+    align-self: center;
   }
   .hero-visual .mascot-bg { display: none; }
   .hero-visual .mascot-img {
-    position: relative; z-index: 1;
     width: 100%; height: 100%; object-fit: cover; object-position: top center;
     display: block;
     animation: mascot-bob 3.6s ease-in-out infinite;
   }
   @keyframes mascot-bob {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+    50% { transform: translateY(-6px); }
   }
   .hero-visual .sticker {
-    position: absolute; bottom: 6%; left: 4%;
+    position: absolute; bottom: 6%; left: 6%;
     background: var(--accent); color: white;
     padding: 10px 14px; border-radius: 12px;
     font-weight: 700; font-size: 11px;
@@ -137,6 +114,54 @@
     display: block; font-family: 'JetBrains Mono', monospace;
     font-size: 9.5px; font-weight: 500; opacity: .9; margin-top: 2px;
   }
+
+  /* 텍스트 영역 — 오른쪽 열, 왼쪽 정렬 */
+  .hero-tag {
+    grid-column: 2; grid-row: 1;
+    align-self: end;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 14px; border-radius: 999px;
+    background: var(--paper); border: 1px solid var(--line);
+    font-size: 12px; color: var(--ink-soft); margin-bottom: 0; font-weight: 500;
+    width: fit-content;
+  }
+  .hero-tag .live { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 3px rgba(217,88,58,.18); }
+
+  .hero-headline {
+    grid-column: 2; grid-row: 2;
+    font-weight: 900; letter-spacing: -.045em;
+    font-size: clamp(48px, 5.5vw, 96px);
+    line-height: 1.08; color: var(--ink);
+    margin-top: 20px;
+  }
+  .hero-headline .accent { color: var(--accent); }
+  .hero-headline .stroke {
+    -webkit-text-stroke: 1.5px var(--ink); color: transparent; font-style: italic;
+  }
+
+  .hero-sub {
+    grid-column: 2; grid-row: 3;
+    margin: 24px 0 0; max-width: 480px;
+    font-size: 16px; color: var(--ink-soft); line-height: 1.65;
+  }
+
+  .hero-cta {
+    grid-column: 2; grid-row: 4;
+    margin-top: 36px; display: flex; gap: 12px; align-items: center;
+    justify-content: flex-start; flex-wrap: wrap;
+  }
+
+  .hero-meta-strip {
+    grid-column: 2; grid-row: 5;
+    margin-top: 48px; padding-top: 28px;
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: flex-start; gap: 56px;
+    width: 100%;
+  }
+  .hero-meta-strip > div { text-align: left; }
+  .hero-meta-strip .num { font-weight: 900; font-size: 32px; letter-spacing: -.03em; line-height: 1; }
+  .hero-meta-strip .lab { margin-top: 6px; font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+
   .scroll-hint {
     position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
     font-size: 11px; color: var(--muted); letter-spacing: .12em;
@@ -591,8 +616,22 @@
     .landing-header { padding: 18px 22px; }
     .landing-header .right .nav-link { display: none; }
     #landing { padding: 0 22px; }
-    .hero-land { padding-top: 100px; padding-bottom: 60px; min-height: auto; }
-    .hero-visual { max-width: 420px; margin-top: 40px; }
+    .hero-land {
+      padding-top: 100px; padding-bottom: 60px; min-height: auto;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      justify-items: center; text-align: center;
+    }
+    .hero-visual {
+      grid-column: 1; grid-row: auto;
+      max-width: 280px; margin: 0 auto 32px;
+    }
+    .hero-tag { grid-column: 1; grid-row: auto; }
+    .hero-headline { grid-column: 1; grid-row: auto; font-size: clamp(40px, 10vw, 64px); }
+    .hero-sub { grid-column: 1; grid-row: auto; margin: 20px auto 0; }
+    .hero-cta { grid-column: 1; grid-row: auto; justify-content: center; }
+    .hero-meta-strip { grid-column: 1; grid-row: auto; justify-content: center; }
+    .hero-meta-strip > div { text-align: center; }
     .scroll-hint { display: none; }
     .land-section { padding: 70px 0; }
     .gallery {
@@ -638,6 +677,14 @@
   </header>
 
   <section class="hero-land">
+    <!-- 왼쪽: 캐릭터 이미지 -->
+    <div class="hero-visual">
+      <div class="mascot-bg"></div>
+      <img class="mascot-img" src="./assets/char-man.png" alt="UCI 도우미 유씨가 인사하는 모습" />
+      <div class="sticker">발급완료<span class="code">G701-2026-0142</span></div>
+    </div>
+
+    <!-- 오른쪽: 텍스트 콘텐츠 -->
     <div class="hero-tag"><span class="live"></span>안녕하세요, 저는 UCI 도우미 유씨예요</div>
     <h1 class="hero-headline">
       복잡한 UCI 등록은<br/>
@@ -652,13 +699,6 @@
       <button class="btn btn-primary btn-lg" onclick="goToLogin()">유씨와 시작하기 →</button>
       <button class="btn btn-ghost btn-lg" onclick="document.getElementById('workflow').scrollIntoView({behavior:'smooth'})">작동 방식 보기</button>
     </div>
-
-    <div class="hero-visual">
-      <div class="mascot-bg"></div>
-      <img class="mascot-img" src="./assets/char-man.png" alt="UCI 도우미 유씨가 인사하는 모습" />
-      <div class="sticker">발급완료<span class="code">G701-2026-0142</span></div>
-    </div>
-
     <div class="hero-meta-strip">
       <div><div class="num">30초</div><div class="lab">평균 등록시간</div></div>
       <div><div class="num">142K+</div><div class="lab">발급된 UCI</div></div>
