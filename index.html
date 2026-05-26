@@ -84,36 +84,24 @@
   /* 캐릭터 이미지 — 왼쪽 열 전체 span */
   .hero-visual {
     grid-column: 1;
-    grid-row: 1 / 5;
+    grid-row: 1 / 6;
     position: relative;
-    width: 100%; aspect-ratio: 3/4;
-    border-radius: 28px; overflow: hidden;
-    box-shadow: 0 24px 60px -16px rgba(26,22,20,.25);
-    align-self: center;
+    width: 100%;
+    display: flex; align-items: flex-end; justify-content: center;
+    align-self: stretch;
   }
   .hero-visual .mascot-bg { display: none; }
   .hero-visual .mascot-img {
-    width: 100%; height: 100%; object-fit: cover; object-position: top center;
-    display: block;
+    width: 100%; height: auto; display: block;
+    object-fit: contain; object-position: bottom center;
+    filter: drop-shadow(0 20px 32px rgba(26,22,20,.18));
     animation: mascot-bob 3.6s ease-in-out infinite;
   }
   @keyframes mascot-bob {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
   }
-  .hero-visual .sticker {
-    position: absolute; bottom: 6%; left: 6%;
-    background: var(--accent); color: white;
-    padding: 10px 14px; border-radius: 12px;
-    font-weight: 700; font-size: 11px;
-    transform: rotate(-6deg);
-    box-shadow: 0 12px 24px -10px rgba(217,88,58,.45);
-    z-index: 2; text-align: center;
-  }
-  .hero-visual .sticker .code {
-    display: block; font-family: 'JetBrains Mono', monospace;
-    font-size: 9.5px; font-weight: 500; opacity: .9; margin-top: 2px;
-  }
+  .hero-visual .sticker { display: none; }
 
   /* 텍스트 영역 — 오른쪽 열, 왼쪽 정렬 */
   .hero-tag {
@@ -568,22 +556,65 @@
   /* ========== LOGIN ========== */
   .login-screen {
     position: fixed; inset: 0; z-index: 200;
-    background: var(--bg);
-    display: none; align-items: center; justify-content: center; padding: 24px;
+    display: none; align-items: stretch;
+    animation: fadeIn .25s ease;
   }
   .login-screen.show { display: flex; }
-  .login-screen::before {
+
+  /* 왼쪽: 캐릭터 패널 */
+  .login-visual {
+    width: 400px; flex-shrink: 0;
+    position: relative; overflow: hidden;
+    background: var(--bg-soft);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-end;
+    border-right: 1px solid var(--line);
+  }
+  .login-visual img {
+    width: 75%; height: auto; object-fit: contain;
+    display: block; margin-top: auto;
+    filter: drop-shadow(0 12px 24px rgba(26,22,20,.12));
+  }
+  .login-visual::after { display: none; }
+  .login-visual .vis-text {
+    width: 100%; padding: 32px 36px 40px;
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+  }
+  .login-visual .vis-text .vis-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--paper); border: 1px solid var(--line);
+    padding: 5px 12px; border-radius: 999px;
+    font-size: 11px; font-weight: 600; color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .login-visual .vis-text .vis-tag .live { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 3px rgba(217,88,58,.18); }
+  .login-visual .vis-text p {
+    font-size: clamp(20px, 1.8vw, 26px); font-weight: 900;
+    letter-spacing: -.03em; line-height: 1.25; color: var(--ink);
+  }
+  .login-visual .vis-text p .acc { color: var(--accent); }
+
+  /* 오른쪽: 폼 패널 — 빈 영역 클릭 시 닫힘 */
+  .login-form-side {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    padding: 40px; overflow-y: auto;
+    background: var(--bg); cursor: pointer;
+  }
+  .login-form-side::before {
     content: ""; position: absolute; inset: 0; pointer-events: none;
     background:
-      radial-gradient(circle at 20% 30%, rgba(217,88,58,.12) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(181,139,43,.10) 0%, transparent 50%);
+      radial-gradient(circle at 80% 30%, rgba(217,88,58,.10) 0%, transparent 50%),
+      radial-gradient(circle at 20% 80%, rgba(181,139,43,.08) 0%, transparent 50%);
   }
+
   .login-card {
     background: var(--paper); border-radius: 24px;
     border: 1px solid var(--line);
-    max-width: 440px; width: 100%; padding: 44px 40px;
-    box-shadow: 0 30px 80px -20px rgba(26,22,20,.25);
-    position: relative; z-index: 1;
+    max-width: 420px; width: 100%; padding: 44px 40px;
+    box-shadow: 0 30px 80px -20px rgba(26,22,20,.2);
+    position: relative; z-index: 1; cursor: default;
+    animation: slideUp .35s cubic-bezier(.2,.8,.2,1);
   }
   .login-card .logo { font-size: 28px; margin-bottom: 6px; }
   .login-card .tag { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
@@ -591,13 +622,20 @@
   .login-card h1 .accent { color: var(--accent); }
   .login-card .desc { font-size: 13.5px; color: var(--ink-soft); margin-bottom: 28px; }
   .login-back {
-    position: absolute; top: 24px; left: 24px;
+    position: fixed; top: 24px; left: 24px;
     width: 36px; height: 36px; border-radius: 50%;
-    background: var(--paper); border: 1px solid var(--line);
-    display: grid; place-items: center; cursor: pointer; z-index: 2;
+    background: rgba(246,241,231,.85); backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    display: grid; place-items: center; cursor: pointer; z-index: 10;
     color: var(--ink-soft); font-family: inherit;
+    transition: all .15s;
   }
   .login-back:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  @media (max-width: 860px) {
+    .login-visual { display: none; }
+    .login-form-side { padding: 24px; }
+  }
 
   .toast {
     position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120%);
@@ -680,7 +718,7 @@
     <!-- 왼쪽: 캐릭터 이미지 -->
     <div class="hero-visual">
       <div class="mascot-bg"></div>
-      <img class="mascot-img" src="./assets/char-man.png" alt="UCI 도우미 유씨가 인사하는 모습" />
+      <img class="mascot-img" src="./assets/hero_mas.png" alt="UCI 도우미 유씨가 인사하는 모습" />
       <div class="sticker">발급완료<span class="code">G701-2026-0142</span></div>
     </div>
 
@@ -730,7 +768,7 @@
         <img src="./assets/work-petals.jpg" alt="꽃잎 일러스트" />
         <div class="overlay-tag">
           <div class="title">봄이 지나가는 법</div>
-          <span class="code">G701-2026-0141 · 일러스트</span>
+          <span class="code">G701-2026-0141 · 웹툰</span>
         </div>
       </div>
       <div class="gal-item tall">
@@ -743,8 +781,8 @@
       <div class="gal-item">
         <img src="./assets/char-anime.png" alt="캐릭터 포트레이트" />
         <div class="overlay-tag">
-          <div class="title">캐릭터 디자인 #07</div>
-          <span class="code">G701-2026-0140 · 일러스트</span>
+          <div class="title">밀향</div>
+          <span class="code">G701-2026-0140 · 웹소설</span>
         </div>
       </div>
     </div>
@@ -869,33 +907,46 @@
 <!-- ========== LOGIN ========== -->
 <div class="login-screen" id="loginScreen">
   <button class="login-back" onclick="goToLanding()" aria-label="뒤로">←</button>
-  <div class="login-card">
-    <div class="logo"><span class="dot"></span>UCI<span>Studio</span></div>
-    <div class="tag">그리는 사람을 위한 식별번호 등록 스튜디오</div>
-    <h1>다시 오신 것을<br/><span class="accent">환영합니다</span></h1>
-    <p class="desc">한 번만 로그인하면 다음부터는 자동으로 이어집니다.</p>
 
-    <div class="field">
-      <label>이메일</label>
-      <input type="email" id="loginEmail" placeholder="writer@example.com" value="leo@toonsquare.co" />
+  <!-- 왼쪽: 캐릭터 패널 -->
+  <div class="login-visual">
+    <img src="./assets/popup_mas.png" alt="UCI 도우미 유씨" />
+    <div class="vis-text">
+      <div class="vis-tag"><span class="live"></span>UCI 도우미 유씨</div>
+      <p>당신의 작품에<br/><span class="acc">이름을 새깁니다.</span></p>
     </div>
-    <div class="field">
-      <label>비밀번호</label>
-      <input type="password" id="loginPw" placeholder="••••••••" value="demo1234" />
+  </div>
+
+  <!-- 오른쪽: 폼 — 빈 영역 클릭 시 닫힘 -->
+  <div class="login-form-side" id="loginFormSide">
+    <div class="login-card">
+      <div class="logo"><span class="dot"></span>UCI<span>Studio</span></div>
+      <div class="tag">그리는 사람을 위한 식별번호 등록 스튜디오</div>
+      <h1>다시 오신 것을<br/><span class="accent">환영합니다</span></h1>
+      <p class="desc">한 번만 로그인하면 다음부터는 자동으로 이어집니다.</p>
+
+      <div class="field">
+        <label>이메일</label>
+        <input type="email" id="loginEmail" placeholder="writer@example.com" value="leo@toonsquare.co" />
+      </div>
+      <div class="field">
+        <label>비밀번호</label>
+        <input type="password" id="loginPw" placeholder="••••••••" value="demo1234" />
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:18px 0 24px;">
+        <label class="check">
+          <input type="checkbox" id="autoLogin" checked />
+          자동 로그인 유지
+        </label>
+        <a href="#" style="font-size:12.5px;color:var(--muted);">비밀번호 찾기</a>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;border-radius:12px;" onclick="doLogin()">
+        로그인하고 시작하기 →
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:20px;">
+        처음이신가요? <a href="#" style="color:var(--ink);font-weight:600;">회원가입</a>
+      </p>
     </div>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin:18px 0 24px;">
-      <label class="check">
-        <input type="checkbox" id="autoLogin" checked />
-        자동 로그인 유지
-      </label>
-      <a href="#" style="font-size:12.5px;color:var(--muted);">비밀번호 찾기</a>
-    </div>
-    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;border-radius:12px;" onclick="doLogin()">
-      로그인하고 시작하기 →
-    </button>
-    <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:20px;">
-      처음이신가요? <a href="#" style="color:var(--ink);font-weight:600;">회원가입</a>
-    </p>
   </div>
 </div>
 
@@ -1325,6 +1376,18 @@
       const hasIssuer = (function(){ try { return localStorage.getItem('uci_issuer'); } catch(e) { return null; } })();
       if (!hasIssuer) setTimeout(() => openModal('issuerModal'), 600);
     }
+
+    // 로그인 팝업: 빈 영역(폼 사이드) 클릭 시 닫기
+    document.getElementById('loginFormSide').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) goToLanding();
+    });
+
+    // ESC 키로 로그인 팝업 닫기
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (document.getElementById('loginScreen').classList.contains('show')) goToLanding();
+      }
+    });
   });
 
   function openModal(id) {
