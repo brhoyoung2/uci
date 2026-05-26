@@ -77,16 +77,17 @@
   .hero-land {
     min-height: 100vh; padding-top: 100px; padding-bottom: 60px;
     display: grid;
-    grid-template-columns: 300px 1fr;
-    column-gap: 56px;
-    align-items: center;
+    grid-template-columns: 290px 1fr;
+    column-gap: 24px;
+    align-items: start;
     position: relative;
   }
 
-  /* 왼쪽 — 캐릭터 */
+  /* 왼쪽 — 캐릭터: 상단을 헤드라인 시작점에 맞춤 (태그 높이 + margin ≈ 54px) */
   .hero-visual {
-    display: flex; align-items: center; justify-content: center;
-    align-self: center;
+    display: flex; align-items: flex-start; justify-content: center;
+    align-self: start;
+    margin-top: 54px;
   }
   .hero-visual .mascot-bg { display: none; }
   .hero-visual .sticker { display: none; }
