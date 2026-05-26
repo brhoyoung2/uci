@@ -321,10 +321,17 @@
   .testi-author .who .name { font-weight: 700; font-size: 14.5px; }
   .testi-author .who .role { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
+  .final-cta-wrap { position: relative; margin: 80px 0 60px; }
+  .final-cta-wrap .cta-char {
+    position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+    height: 160px; width: auto; display: block;
+    filter: drop-shadow(0 10px 24px rgba(26,22,20,.22));
+    z-index: 5;
+  }
   .final-cta {
     background: var(--ink); color: var(--bg);
-    border-radius: 32px; padding: 100px 60px;
-    margin: 80px 0 60px; text-align: center;
+    border-radius: 32px; padding: 110px 60px 100px;
+    margin: 0; text-align: center;
     position: relative; overflow: hidden;
   }
   .final-cta::before {
@@ -709,6 +716,7 @@
 
   .toast {
     position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120%);
+    visibility: hidden;
     background: var(--ink); color: var(--bg);
     padding: 14px 22px; border-radius: 12px;
     font-size: 13.5px; z-index: 300;
@@ -716,7 +724,7 @@
     transition: transform .35s cubic-bezier(.2,.8,.2,1);
     display: flex; align-items: center; gap: 10px;
   }
-  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast.show { transform: translateX(-50%) translateY(0); visibility: visible; }
   .toast .dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
 
   /* ========== RESPONSIVE ========== */
@@ -1117,6 +1125,8 @@
     </div>
   </section>
 
+  <div class="final-cta-wrap">
+  <img class="cta-char" src="./assets/02_autoSaving.png" alt="유씨" />
   <section class="final-cta">
     <h2>작가님들을 위한 UCI 간편 서비스<br/><span class="accent">유씨와</span> 함께하세요.</h2>
     <p>당신의 작품이 곧 자산입니다. 한 컷 한 화, 빠짐없이 보호하세요.</p>
@@ -1125,6 +1135,7 @@
       <button class="btn btn-ghost btn-lg" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">기능 다시 보기</button>
     </div>
   </section>
+  </div>
 
   <footer class="land-footer">
     <div>© 2026 UCI Studio · made for creators</div>
