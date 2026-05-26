@@ -107,19 +107,17 @@
   .hero-meta-strip .lab { margin-top: 6px; font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
 
   .hero-visual {
-    position: relative; width: 100%; max-width: 540px;
-    margin: 48px auto 0; aspect-ratio: 968/618;
+    position: relative; width: 100%; max-width: 320px;
+    margin: 48px auto 0; aspect-ratio: 3/4;
     display: flex; align-items: center; justify-content: center;
+    border-radius: 28px; overflow: hidden;
+    box-shadow: 0 24px 60px -16px rgba(26,22,20,.25);
   }
-  .hero-visual .mascot-bg {
-    position: absolute; inset: 6% 8% 12% 8%;
-    background: radial-gradient(ellipse at 35% 55%, rgba(217,88,58,.12) 0%, rgba(217,88,58,.04) 45%, transparent 70%);
-    border-radius: 50%;
-  }
+  .hero-visual .mascot-bg { display: none; }
   .hero-visual .mascot-img {
     position: relative; z-index: 1;
-    width: 100%; height: auto; display: block;
-    filter: drop-shadow(0 16px 28px rgba(26,22,20,.15));
+    width: 100%; height: 100%; object-fit: cover; object-position: top center;
+    display: block;
     animation: mascot-bob 3.6s ease-in-out infinite;
   }
   @keyframes mascot-bob {
@@ -642,8 +640,8 @@
   <section class="hero-land">
     <div class="hero-tag"><span class="live"></span>안녕하세요, 저는 UCI 도우미 유씨예요</div>
     <h1 class="hero-headline">
-      복잡한 등록은<br/>
-      유씨가<br/>
+      복잡한 UCI 등록은<br/>
+      제가<br/>
       <span class="accent">도와드릴게요.</span>
     </h1>
     <p class="hero-sub">
@@ -657,7 +655,7 @@
 
     <div class="hero-visual">
       <div class="mascot-bg"></div>
-      <img class="mascot-img" src="./assets/char-hero.jpg" alt="UCI 도우미 유씨가 인사하는 모습" />
+      <img class="mascot-img" src="./assets/char-man.png" alt="UCI 도우미 유씨가 인사하는 모습" />
       <div class="sticker">발급완료<span class="code">G701-2026-0142</span></div>
     </div>
 
@@ -703,7 +701,7 @@
         </div>
       </div>
       <div class="gal-item">
-        <img src="./assets/char-portrait.jpg" alt="캐릭터 포트레이트" />
+        <img src="./assets/char-anime.png" alt="캐릭터 포트레이트" />
         <div class="overlay-tag">
           <div class="title">캐릭터 디자인 #07</div>
           <span class="code">G701-2026-0140 · 일러스트</span>
@@ -789,7 +787,7 @@
   <section class="land-section">
     <div class="testimonial">
       <div class="testi-visual">
-        <img src="./assets/char-portrait.jpg" alt="작가의 캐릭터" />
+        <img src="./assets/char-man.png" alt="작가의 캐릭터" />
       </div>
       <div class="testi-content">
         <div class="quote-mark">"</div>
