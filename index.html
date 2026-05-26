@@ -1692,6 +1692,16 @@
     p.addEventListener('click', () => {
       document.querySelectorAll('.filter-pill').forEach(x => x.classList.remove('active'));
       p.classList.add('active');
+      const map = { '전체': null, '발급완료': 'ok', '대기': 'pending', '초안': 'draft' };
+      const target = map[p.textContent.trim()];
+      document.querySelectorAll('table.history tbody tr').forEach(row => {
+        const statusEl = row.querySelector('.status');
+        if (!target || (statusEl && statusEl.classList.contains(target))) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
     });
   });
 
