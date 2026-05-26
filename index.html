@@ -260,6 +260,13 @@
   .feature-card .fc-body p { color: var(--ink-soft); font-size: 13.5px; line-height: 1.65; }
 
   .workflow { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: center; margin-top: 60px; }
+  .workflow-visual-wrap { position: relative; max-width: 360px; }
+  .workflow-char {
+    position: absolute; bottom: -24px; right: -36px;
+    height: 120px; width: auto; display: block;
+    filter: drop-shadow(0 8px 18px rgba(26,22,20,.18));
+    z-index: 5;
+  }
   .workflow-visual {
     position: relative; aspect-ratio: 9/14; max-width: 360px;
     border-radius: 28px; overflow: hidden; background: #ddd;
@@ -754,7 +761,8 @@
     .gal-item.tall { grid-row: auto; }
     .features { grid-template-columns: 1fr; }
     .workflow, .testimonial { grid-template-columns: 1fr; gap: 40px; }
-    .workflow-visual, .testi-visual { max-width: 320px; margin: 0 auto; }
+    .workflow-visual-wrap, .testi-visual { max-width: 320px; margin: 0 auto; }
+    .workflow-visual { max-width: 100%; }
     .workflow-visual .label-float { right: auto; left: 50%; transform: translateX(-50%) rotate(0); top: auto; bottom: -16px; }
     .final-cta { padding: 60px 26px; border-radius: 22px; }
 
@@ -1066,12 +1074,15 @@
     </h2>
 
     <div class="workflow">
-      <div class="workflow-visual">
-        <img src="./assets/work-drawing.jpg" alt="드로잉 앱 작업 화면" />
-        <div class="label-float">
-          <span class="small">JUST FINISHED</span>
-          캐릭터 디자인 v11.3
+      <div class="workflow-visual-wrap">
+        <div class="workflow-visual">
+          <img src="./assets/work-drawing.jpg" alt="드로잉 앱 작업 화면" />
+          <div class="label-float">
+            <span class="small">JUST FINISHED</span>
+            캐릭터 디자인 v11.3
+          </div>
         </div>
+        <img class="workflow-char" src="./assets/03_exeal.png" alt="유씨" />
       </div>
 
       <div>
