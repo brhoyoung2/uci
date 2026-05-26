@@ -398,18 +398,19 @@
   }
   main.app-main { max-width: 1280px; margin: 0 auto; padding: 40px 32px 80px; position: relative; z-index: 2; }
 
-  .app-hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; margin-bottom: 40px; align-items: end; }
-  .app-hero-left { display: flex; align-items: flex-end; gap: 20px; }
-  .app-hero-char { height: 160px; width: auto; display: block; filter: drop-shadow(0 8px 16px rgba(26,22,20,.12)); flex-shrink: 0; }
+  .app-hero { display: grid; grid-template-columns: 1.5fr 0.8fr; gap: 32px; margin-bottom: 40px; align-items: end; }
+  .app-hero-left { display: flex; align-items: flex-start; gap: 16px; }
+  .app-hero-char { height: 130px; width: auto; display: block; filter: drop-shadow(0 8px 16px rgba(26,22,20,.12)); flex-shrink: 0; margin-top: 4px; }
   .app-hero h1 {
     font-weight: 900; letter-spacing: -.04em;
-    font-size: clamp(40px, 5vw, 64px); line-height: 1; color: var(--ink);
+    font-size: clamp(34px, 3.8vw, 50px); line-height: 1.05; color: var(--ink);
   }
   .app-hero h1 .accent { color: var(--accent); }
   .app-hero p.sub { margin-top: 18px; color: var(--ink-soft); font-size: 15px; max-width: 480px; }
   .hero-meta {
-    border-top: 1px solid var(--line-strong); padding-top: 18px;
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    border-top: 1px solid var(--line-strong); padding-top: 16px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    justify-self: end; width: 100%;
   }
   .hero-meta .item .label { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 6px; }
   .hero-meta .item .value { font-weight: 900; font-size: 32px; letter-spacing: -.03em; color: var(--ink); line-height: 1; }
